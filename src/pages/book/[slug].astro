@@ -5,11 +5,11 @@ import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const books = await fetchBooks();
-  return books.map(book => ({ params: { slug: book.slug } }));
+  return books.map((book: { slug: string }) => ({ params: { slug: book.slug } }));
 }
 
 const books = await fetchBooks();
-const book = books.find(b => b.slug === Astro.params.slug);
+const book = books.find((b: { slug: string }) => b.slug === Astro.params.slug);
 ---
 
 <Layout title={book.title}>

@@ -1,48 +1,35 @@
-# Astro Starter Kit: Basics
+# ⚡ Serverless Astro.js with Google Sheets as a Database + Dynamic Routing! 🚀
 
-```sh
-npm create astro@latest -- --template basics
-```
+📊 **Turn Google Sheets into a lightweight database with dynamic routing in Astro.js!** 
+No backend, no traditional CMS—just a simple, free, and serverless way to manage content.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 🌟 Features
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+✅ **Google Sheets as a Database** – Store and manage content easily.  
+✅ **Dynamic Routing** – Auto-generates pages based on your sheet data.  
+✅ **Free & Serverless** – No hosting costs, no backend needed.  
+✅ **SEO-Friendly** – Static, fast, and optimized for search engines.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🚧 Limitations
 
-## 🚀 Project Structure
+⚠️ **Google API Quotas** – Too many requests? Google might slow you down.  
+⚠️ **Read-Only** – No live edits on your site; update via Sheets.  
+⚠️ **Sheet Structure Matters** – Change column names? Break everything. 😅  
+⚠️ **Public Data Only** – We use OpenSheets, so your sheet **must** be public. If privacy is a concern, use the official Google API instead.  
+⚠️ **Not Ideal for Large Data** – Too many rows? Performance may suffer! This works best for lightweight datasets.
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🛠️ Setup
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### For the repo:
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+1️⃣ **Edit `sitemap.xml`** – Update it for your site structure.  
+2️⃣ **Modify `fetchbooks.js`** – Adjust data fetching as needed.  
+3️⃣ **Customize the frontend** – Tweak styles, layout, and content to match your vision.
 
-## 🧞 Commands
+📖 Full tutorial 👉 [Read here](https://medium.com/@iabhinavj/how-to-build-a-serverless-astro-js-website-with-google-sheets-as-a-database-free-easy)
 
-All commands are run from the root of the project, from a terminal:
+## 🤝 Contribute!
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Got ideas? Bugs? PRs welcome! Let’s make this cooler together. 🎉
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+💙 **Star this repo if you love free stuff!** ⭐✨

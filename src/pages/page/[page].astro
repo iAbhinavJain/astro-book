@@ -18,13 +18,14 @@ const perPage = 12;
 const page = Number(Astro.params.page);
 const paginatedBooks = books.slice((page - 1) * perPage, page * perPage);
 const totalPages = Math.ceil(books.length / perPage);
+const totalbooks = (books.length) + 1;
 ---
 
 <Layout title=`SheetBook - Page ${page}`>
     <div class="bg-white">
         <div class="mx-auto px-[10%] py-6">
           <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {paginatedBooks.map(book => (
+            {paginatedBooks.map((book: { image: string; title: string; slug: string; author: string; year: string; pub: string }) => (
             <div class="group relative">
               <img src={book.image} alt={book.title}
                 class="w-full bg-gray-200 object-cover group-hover:opacity-75 h-[46vh]">
@@ -55,7 +56,7 @@ const totalPages = Math.ceil(books.length / perPage);
               to
               <span class="font-medium">{page * perPage}</span>
               of
-              <span class="font-medium">{totalPages}</span>
+              <span class="font-medium">{totalbooks}</span>
               results
             </p>
           </div>
