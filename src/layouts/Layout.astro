@@ -10,12 +10,16 @@ import Header from "../components/header.astro";
 		<title>{title}</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 	</head>
-	<body class="[&::-webkit-scrollbar]:w-2
+	<body
+		class="[&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-track]:slate-950
   [&::-webkit-scrollbar-thumb]:bg-gray-300
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+	>
 		<Header />
 		<main>
 			<slot />
