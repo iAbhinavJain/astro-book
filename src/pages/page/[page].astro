@@ -1,0 +1,38 @@
+---
+import { fetchBooks } from "../../utils/fetchBooks";
+
+export async function getStaticPaths() {
+  const books = await fetchBooks();
+  const perPage = 10; // Number of items per page
+  const totalPages = Math.ceil(books.length / perPage);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: (i + 1).toString() },
+  }));
+}
+
+const books = await fetchBooks();
+const perPage = 10;
+const page = Number(Astro.params.page);
+const paginatedBooks = books.slice((page - 1) * perPage, page * perPage);
+const totalPages = Math.ceil(books.length / perPage);
+---
+
+<html>
+  <head>
+    <title>Book Collection - Page {page}</title>
+  </head>
+  <body>
+    <h1>Book Collection</h1>
+    <ul>
+      {paginatedBooks.map(book => (
+        <li><a href={`/book/${book.slug}`}>{book.title}</a></li>
+      ))}
+    </ul>
+
+    <div>
+      {page > 1 && <a href={`/page/${page - 1}/`}>Previous</a>}
+      {page < totalPages && <a href={`/page/${page + 1}/`}>Next</a>}
+    </div>
+  </body>
+</html>

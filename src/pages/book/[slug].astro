@@ -1,0 +1,23 @@
+---
+import { fetchBooks } from "../../utils/fetchBooks";
+
+export async function getStaticPaths() {
+  const books = await fetchBooks();
+  return books.map(book => ({ params: { slug: book.slug } }));
+}
+
+const books = await fetchBooks();
+const book = books.find(b => b.slug === Astro.params.slug);
+---
+
+<html>
+  <head>
+    <title>{book.meta_title}</title>
+    <meta name="description" content={book.meta_desc} />
+  </head>
+  <body>
+    <h1>{book.title}</h1>
+    <p>by {book.author} ({book.year}) | Published by {book.pub}</p>
+    <img src={book.image} alt={book.title} />
+  </body>
+</html>
