@@ -1,5 +1,7 @@
 ---
 import { fetchBooks } from "../../utils/fetchBooks";
+import "../../styles/global.css";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const books = await fetchBooks();
@@ -10,14 +12,50 @@ const books = await fetchBooks();
 const book = books.find(b => b.slug === Astro.params.slug);
 ---
 
-<html>
-  <head>
-    <title>{book.meta_title}</title>
-    <meta name="description" content={book.meta_desc} />
-  </head>
-  <body>
-    <h1>{book.title}</h1>
-    <p>by {book.author} ({book.year}) | Published by {book.pub}</p>
-    <img src={book.image} alt={book.title} />
-  </body>
-</html>
+<Layout title={book.title}>
+    
+    <section>
+        <div class="bg-white z-99 relative pb-5 min-h-[80.5vh] flex md:items-center">
+          <div class="mx-auto px-[10%] py-6">
+            <div class="mt-6 md:flex gap-10 items-center">
+              <div class="w-full md:max-w-[30%]">
+                <img
+                  src={book.image}
+                  alt={book.title}
+                  class="w-full bg-gray-200 object-cover group-hover:opacity-75"
+                />
+              </div>
+              <div class="md:max-w-[50%] mt-6 md:mt-0">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{book.title}</h1>
+                <div class="py-10 lg:col-span-2 lg:col-start-1 lg:pt-6 lg:pr-8 lg:pb-16">
+                  <!-- Description and details -->
+                  <div>
+                    <h3 class="sr-only">Description</h3>
+        
+                    <div class="space-y-6">
+                      <p class="text-base text-gray-900"><i>The book, "{book.title}"</i> was written by {book.author} in {book.year}. This book is published by {book.pub}. Feel free to click the button below to learn more about this book on google. </p>
+                    </div>
+                  </div>
+        
+                  <div class="mt-10">
+                    <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
+        
+                    <div class="mt-4">
+                      <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                        <li class="text-gray-400"><span class="text-gray-600"><b>Author:</b> {book.author}</span></li>
+                        <li class="text-gray-400"><span class="text-gray-600"><b>Publisher: </b>{book.pub}</span></li>
+                        <li class="text-gray-400"><span class="text-gray-600"><b>Year: </b> {book.year}</span></li>
+                        
+                      </ul>
+                    </div>
+                    
+                <a target="_blank" href=`https://www.google.com/search?q=${book.title}` class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-slate-950 px-8 py-3 text-base font-medium text-white hover:bg-slate-800 focus:ring-2 focus:ring-slate-700 focus:ring-offset-2 focus:outline-hidden">Search for book on Google</a>
+              
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</Layout>
