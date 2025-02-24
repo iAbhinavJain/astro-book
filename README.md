@@ -1,7 +1,6 @@
 # ⚡ Serverless Astro.js with Google Sheets as a Database + Dynamic Routing! 🚀
 
-📊 **Turn Google Sheets into a lightweight database with dynamic routing in Astro.js!** 
-No backend, no traditional CMS—just a simple, free, and serverless way to manage content.
+📊 **Turn Google Sheets into a lightweight database with dynamic routing in Astro.js!** No backend, no traditional CMS—just a simple, free, and serverless way to manage content.
 
 ## 🌟 Features
 
@@ -26,7 +25,48 @@ No backend, no traditional CMS—just a simple, free, and serverless way to mana
 2️⃣ **Modify `fetchbooks.js`** – Adjust data fetching as needed.  
 3️⃣ **Customize the frontend** – Tweak styles, layout, and content to match your vision.
 
-📖 Full tutorial 👉 [Read here](https://medium.com/@iabhinavj/how-to-build-a-serverless-astro-js-website-with-google-sheets-as-a-database-free-easy)
+### For Auto Deployment after update in Sheets:
+1️⃣ **Add `Deployment Hook`** – If you are using Cloudflare Pages, its called Deployment Hook.  
+2️⃣ **Add following code to Appscript 
+
+```javascript
+const CLOUDFLARE_WEBHOOK_URL = "YOUR_WEBHOOK_URL";
+function onEdit(e) {
+  const cache = CacheService.getScriptCache();
+  cache.put("lastEdit", new Date().toString(), 600); // Store last edit time for 10 mins
+  // Clear previous triggers (prevents stacking)
+  ScriptApp.getProjectTriggers().forEach(trigger => {
+    if (trigger.getHandlerFunction() === "triggerCloudflareBuild") {
+      ScriptApp.deleteTrigger(trigger);
+    }
+  });
+
+  // Set a delayed trigger to run 10 mins after the last edit
+
+  ScriptApp.newTrigger("triggerCloudflareBuild")
+    .timeBased()
+    .after(10 * 60 * 1000) // 10 minutes
+    .create();
+}
+
+function triggerCloudflareBuild() {
+  const cache = CacheService.getScriptCache();
+  const lastEditTime = new Date(cache.get("lastEdit"));
+  const now = new Date();
+
+  // Ensure no further edits have happened in the last 10 mins
+  if (now - lastEditTime >= 10 * 60 * 1000) {
+    UrlFetchApp.fetch(CLOUDFLARE_WEBHOOK_URL, { method: "POST" });
+  }
+}
+```
+
+3️⃣ **Add Trigger** – 
+Function to run: onEdit
+Event source: From spreadsheet
+Event type: On edit
+
+📖 Full tutorial 👉 [Read here](https://medium.com/@iabhinavj/how-to-build-a-serverless-astro-js-website-with-google-sheets-as-a-database-free-easy-c22ac792b328)
 
 ## 🤝 Contribute!
 
